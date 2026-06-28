@@ -1,0 +1,1058 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no">
+  <title> Toyota Prius 3rd Gen Wiring Table Generator v2_7</title>
+  
+   <!-- Developer Info -->
+  <!--
+    File: toyota_block_builder_v2_7.html
+    Version: 2.7
+    Created: 2026-05-14
+    Purpose: Automotive wiring diagram generator
+    🎯 Result
+☑️Connector image preview system
+☑️Search Pins System
+☑️Search highlight add
+☑️Search Button Logic add
+☑️Clear Search Button
+-->
+ 
+  
+  
+  <style>
+  
+  
+    :root{font-family:system-ui,Segoe UI,Roboto,Arial;margin:0}
+    
+    
+    body{padding:18px;background:#f6f7fb;color:#111}
+    
+    
+    .app{max-width:1100px;margin:0 auto;background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 20px rgba(13,38,76,0.06)}
+    
+    
+    h1{font-size:20px;margin:0 0 12px}
+    label{display:block;font-size:13px;margin:8px 0 4px}
+    input[type=text], textarea{width:100%;padding:8px;border:1px solid #d7dbe8;border-radius:6px;font-size:14px}
+    
+    
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    
+    
+    .col{flex:1}
+    
+    
+    .controls{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    
+    button{padding:8px 12px;border-radius:8px;border:0;background:#2b74e4;color:#fff;cursor:pointer}
+    
+    
+    button.ghost{background:#eef2ff;color:#0b3a8a}
+    
+    
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    
+    
+    td,th{padding:8px;border:1px solid #e6e8f0;text-align:left;font-size:13px}
+    
+    
+    th{background:#fafbff}
+    .small{font-size:12px;color:#666}
+    
+    mark{
+  background:#ffe066;
+  color:#000;
+  padding:1px 3px;
+  border-radius:3px;
+}
+    
+    
+    .actions button{margin-right:6px;padding:6px 8px}
+    .preview-area{margin-top:14px}
+    .export-area{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+    .textarea-export{height:260px;width:100%}
+    @media (max-width:760px){.row{flex-direction:column}}
+  </style>
+</head>
+
+
+
+
+
+<body>
+    
+    
+    
+    
+  <div class="app">
+    <h1>Toyota Wiring Table — Full HTML File Generator</h1>
+    
+    
+    <p class="small">Enter data below. Auto color detection enabled. Generated output includes full HTML.</p>
+    
+    <div id="form">
+        
+        
+        
+        
+ <div class="row">
+     
+     
+  <div class="col">
+    <label>Component Name</label>
+    <input id="componentName" type="text" 
+           placeholder="Stop Light Control Relay Assembly">
+  </div>
+
+
+
+
+
+
+
+
+  <div class="col">
+    <label>Table class name</label>
+    <input id="tableClass" type="text" value="A28_Connection">
+  </div>
+
+ 
+  
+  <div class="col">
+  <label>Number of Pins</label>
+  <input id="pinCount" type="number" min="1"
+         placeholder="Enter pin count (ex: 3)">
+
+  <button id="generatePinsBtn" class="ghost" style="margin-top:8px;">
+    Generate Pins
+  </button>
+</div>
+</div>
+
+
+<div class="col">
+
+  <label>Connector Image URL</label>
+
+  <input
+    id="connectorImage"
+    type="url"
+    placeholder="Paste Blogger image URL"
+  >
+
+  <button
+    id="loadImageBtn"
+    type="button"
+    class="ghost"
+    style="margin-top:8px;"
+  >
+    Load Image
+  </button>
+
+</div>
+
+
+
+
+
+  <div class="row">
+    <div class="col">
+        
+        
+       <label>Terminal No</label>
+      <input id="terminal" type="text" placeholder="A28-1" oninput="autoPrefixTerminal()">
+    </div>
+    
+    
+    <div class="col">
+      <label>Symbol</label>
+      <input id="symbol" type="text" placeholder="STP">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label>Wire Color Code</label>
+
+<select id="wireCode" onchange="window.__autoColor(this.value)">
+  <option value="">— No wire color —</option>
+  <option value="B">B - Black</option>
+  <option value="BE">BE - Beige</option>
+  <option value="BR">BR - Brown</option>
+  <option value="G">G - Green</option>
+  <option value="GR">GR - Gray</option>
+  <option value="L">L - Blue</option>
+  <option value="LG">LG - Light Green</option>
+  <option value="O">O - Orange</option>
+  <option value="P">P - Pink</option>
+  <option value="R">R - Red</option>
+  <option value="SB">SB - Sky Blue</option>
+  <option value="V">V - Violet</option>
+  <option value="W">W - White</option>
+  <option value="Y">Y - Yellow</option>
+  <option value="B_G">B_G - Black-Green</option>
+  <option value="B_R">B_R - Black-Red</option>
+  <option value="B_W">B_W - Black-White</option>
+  <option value="G_R">G_R - Green-Red</option>
+  <option value="G_W">G_W - Green-White</option>
+  <option value="L_R">L_R - Blue-Red</option>
+  <option value="L_W">L_W - Blue-White</option>
+  <option value="R_W">R_W - Red-White</option>
+  <option value="Y_G">Y_G - Yellow-Green</option>
+</select>
+</div>
+      </div>
+      
+      
+      <label style="margin-top:8px">Electrical Paths (HTML allowed)</label>
+  <textarea id="paths" rows="5" placeholder="&lt;div class=&quot;Electrical_Paths&quot;&gt;
+&lt;span class=&quot;BR maine-arrow&quot;&gt;&#10132;&lt;/span&gt;
+&lt;span class=&quot;D28&quot;&gt;D28 &lt;sup&gt;65&lt;/sup&gt; (ETHW)&lt;/span&gt;
+&lt;a class=&quot;button_B&quot;&gt;[Engine Control Module]&lt;/a&gt;
+&lt;/div&gt;"></textarea>
+  
+  
+  
+
+  <div class="controls">
+    <button id="addBtn">Add row</button>
+    <button id="updateBtn" class="ghost" style="display:none">Update row</button>
+    <button id="clearForm" class="ghost">Clear</button>
+  </div>
+</div>
+
+
+<div style="margin-top:15px;">
+
+  <label>Search Pins</label>
+
+  <div style="display:flex; gap:8px;">
+
+    <input
+      id="searchBox"
+      type="text"
+      placeholder="Search Terminal or Symbol..."
+      style="flex:1;"
+    >
+
+    <button
+      id="searchBtn"
+      class="ghost"
+      type="button"
+    >
+      Search
+    </button>
+
+    <button
+      id="clearSearchBtn"
+      class="ghost"
+      type="button"
+    >
+      Clear
+    </button>
+
+  </div>
+
+</div>
+
+
+<div style="margin-top:15px;text-align:center;">
+
+  <img
+    id="imagePreview"
+    style="
+      max-width:300px;
+      max-height:300px;
+      display:none;
+      border-radius:10px;
+      border:1px solid #ccc;
+    "
+  >
+
+</div>
+
+
+
+
+
+
+<div class="preview-area">
+  <h3 style="margin:12px 0 8px">Preview rows</h3>
+  <table id="previewTable">
+    <thead>
+      <tr><th>Terminal No</th><th>Symbol</th><th>Wire Color</th><th>Paths</th><th>Actions</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="export-area">
+    <button id="exportJson" class="ghost">Export JSON</button>
+    <button id="importJsonBtn" class="ghost">Import JSON</button>
+ <input type="file" id="importJsonFile" accept=".json,application/json" style="display:none">
+    <button id="exportHtml">Generate Full HTML File</button>
+    <button id="downloadBtn" class="ghost">Download .html</button>
+    <button id="copyBtn" class="ghost">Copy HTML</button>
+    <button id="importExample" class="ghost">Load example</button>
+  </div>
+
+  <textarea id="exportArea" class="textarea-export" placeholder="Generated full HTML file will appear here..."></textarea>
+</div>
+
+  </div>
+  
+  
+  <script>
+      
+      
+(function(){
+    
+    
+  const colorNames={B:'Black',BE:'Beige',BR:'Brown',G:'Green',GR:'Gray',O:'Orange',P:'Pink',R:'Red',SB:'Sky Blue',L:'Blue',LG:'Light Green',V:'Violet',W:'White',Y:'Yellow'};
+  
+  
+  
+  const rows=[];let editingIndex=-1;
+  
+  
+  
+  // ===============================
+// AUTO SAVE TO LOCAL STORAGE
+// ===============================
+
+const STORAGE_KEY = "toyota_wiring_table_autosave_v1";
+
+function saveToStorage(){
+  const data = {
+    componentName: el('componentName').value.trim(),
+    tableClass: el('tableClass').value.trim(),
+    pinCount: el('pinCount').value,
+    rows: rows
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+
+
+// ===============================
+// AUTO LOAD FROM LOCAL STORAGE
+// ===============================
+
+function loadFromStorage(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(!saved) return;
+
+  try{
+    const data = JSON.parse(saved);
+
+    el('componentName').value = data.componentName || '';
+    el('tableClass').value = data.tableClass || '';
+    el('pinCount').value = data.pinCount || '';
+
+    rows.length = 0;
+
+    (data.rows || []).forEach(r => {
+      rows.push(r);
+    });
+
+    renderPreview();
+
+  }catch(error){
+    console.error("❌ Storage Load Error:", error);
+  }
+}
+  
+  
+  
+  
+
+function generateRowsByPinCount(){
+  const tableClass = el('tableClass').value.trim();
+  const pinCount = parseInt(el('pinCount').value);
+
+  if(!tableClass){
+    alert('Enter Table Class first');
+    return;
+  }
+
+  if(!pinCount || pinCount < 1){
+    alert('Enter valid Pin Count');
+    return;
+  }
+
+  const prefix = tableClass.split('_')[0]; // A28
+
+  rows.length = 0; // clear old rows
+
+  for(let i = 1; i <= pinCount; i++){
+    rows.push({
+      terminal: prefix + '-' + i,
+      symbol: '',
+      code: '',
+      display: '(—) <br> No Color',
+      wiringHtml: '(—) <br> No Color',
+      pathsText: '',
+      pathsHtml: ''
+    });
+  }
+
+  renderPreview();
+}
+  
+  
+  
+  
+  
+  window.autoPrefixTerminal = function(){
+  const tbl = document.getElementById('tableClass').value.trim();
+  const prefix = tbl.split('_')[0];
+  const term = document.getElementById('terminal').value.trim();
+  if(/^\d+$/.test(term)){
+    document.getElementById('terminal').value = prefix + '-' + term;
+  }
+}
+
+
+
+
+const el=id=>document.getElementById(id);
+  const tbody=document.querySelector('#previewTable tbody');
+
+
+
+
+
+  window.__autoColor=function(code){
+  code = code.trim().toUpperCase();
+  if(!code) return;
+
+  const parts = code.split('_');
+  let text = '';
+
+  if(parts.length === 1){
+    const name = colorNames[parts[0]] || '';
+    text = `(${code})<br>${name}`;
+  }else if(parts.length === 2){
+    const c1 = colorNames[parts[0]] || parts[0];
+    const c2 = colorNames[parts[1]] || parts[1];
+    text = `(${code})<br>${c1}-${c2}`;
+  }
+
+  el('wireCode').dataset.display = text;
+}
+
+
+
+
+function renderPreview(filter=''){
+
+  tbody.innerHTML='';
+
+  const keyword = filter.trim().toLowerCase();
+
+  const filteredRows = rows.filter(r => {
+
+    return (
+      r.terminal.toLowerCase().includes(keyword) ||
+      r.symbol.toLowerCase().includes(keyword)
+    );
+
+  });
+
+  filteredRows.forEach((r,i)=>{
+
+    const tr=document.createElement('tr');
+
+    tr.innerHTML=`
+     <td>${highlightText(r.terminal, keyword)}</td>
+<td>${highlightText(r.symbol, keyword)}</td>
+      
+      
+      <td class='${escapeHtmlAttr(r.code)}'>
+        ${r.display}
+      </td>
+      <td>${r.pathsHtml}</td>
+      <td class='actions'>
+        <button onclick='window.__edit(${rows.indexOf(r)})'>
+          Edit
+        </button>
+
+        <button onclick='window.__remove(${rows.indexOf(r)})'>
+          Delete
+        </button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+  window.__edit = editRow;
+  window.__remove = removeRow;
+
+  saveToStorage();
+}
+  
+ function addRow(){
+
+  const terminal = el('terminal').value.trim();
+
+  // 🔴 Normalize (Bonus Pro Tip)
+  const cleanTerminal = terminal.toLowerCase();
+
+  // 🔴 Duplicate check
+  if(rows.some(row => row.terminal.trim().toLowerCase() === cleanTerminal)){
+    alert('⚠️ මේ Terminal එක දැනටමත් table එකේ තියෙනවා!');
+    return;
+  }
+
+
+
+  // ⚠️ Electrical Paths empty check
+  const pathsValue = el('paths').value.trim();
+  if(!pathsValue){
+    alert('⚠️ Electrical Paths field is empty.\nPlease add an Electrical Path before adding the row.');
+    el('paths').focus();
+    return;
+  }
+
+  const r = readForm();
+
+  if(!r.terminal){
+    alert('Terminal No is required');
+    return;
+  }
+
+  rows.push(r);
+  clearForm();
+  renderPreview();
+}
+  
+  
+  
+  
+  function editRow(i){
+  const r = rows[i];
+  editingIndex = i;
+
+  el('terminal').value = r.terminal;
+  el('symbol').value   = r.symbol;
+  el('wireCode').value = r.code;
+
+  el('paths').value    = r.pathsText || '';
+
+  el('addBtn').style.display    = 'none';
+  el('updateBtn').style.display = 'inline-block';
+}
+  
+  
+  
+  
+ function updateRow(){
+
+  const terminal = el('terminal').value.trim();
+
+  // 🔴 Normalize (Bonus Pro Tip)
+  const cleanTerminal = terminal.toLowerCase();
+
+  // 🔴 Duplicate check (exclude current editing row)
+  if(rows.some((row, index) => 
+    row.terminal.trim().toLowerCase() === cleanTerminal && index !== editingIndex
+  )){
+    alert('⚠️ මේ Terminal එක දැනටමත් තියෙනවා!');
+    return;
+  }
+
+  const pathsValue = el('paths').value.trim();
+  if(!pathsValue){
+    alert('⚠️ Electrical Paths field is empty.\nPlease add an Electrical Path before updating.');
+    el('paths').focus();
+    return;
+  }
+
+  if(editingIndex < 0) return;
+
+  rows[editingIndex] = readForm();
+  editingIndex = -1;
+
+  clearForm();
+  renderPreview();
+
+  el('addBtn').style.display='inline-block';
+  el('updateBtn').style.display='none';
+}
+  
+  
+  function removeRow(i){if(!confirm('Delete this row?'))return;rows.splice(i,1);renderPreview();}
+
+
+
+
+
+
+  function readForm(){
+  const terminal = el('terminal').value.trim();
+  const symbol = el('symbol').value.trim();
+
+  const code = el('wireCode').value.trim().toUpperCase();
+
+
+  // ✅ FIX: Handle Empty Color properly
+  let display;
+
+if(code === ''){
+  display = '—<br>No Color';
+}else{
+  const parts = code.split('_');
+
+  if(parts.length === 1){
+    const name = colorNames[parts[0]] || '';
+    display = `(${code})<br>${name}`;
+  }else{
+    const c1 = colorNames[parts[0]] || parts[0];
+    const c2 = colorNames[parts[1]] || parts[1];
+    display = `(${code})<br>${c1}-${c2}`;
+  }
+}
+
+
+  let pathsText = el('paths').value.trim();
+
+  // ✅ AUTO-INSERT Electrical Paths if empty
+  if (!pathsText) {
+    pathsText = `
+<div class="Electrical_Paths">
+  <span class="BR maine-arrow">&#10132;</span>
+  <span class="DXX">DXX <sup>--</sup> (WIRE)</span>
+  <a class="button_B">[Unknown Module]</a>
+</div>
+`.trim();
+  }
+
+  const wiringHtml = display;
+  const pathsHtml = pathsText;
+
+  return {
+    terminal,
+    symbol,
+    code,
+    display,
+    wiringHtml,
+    pathsText,
+    pathsHtml
+  };
+}
+
+
+  
+  function clearForm(){el('terminal').value='';el('symbol').value='';el('wireCode').value='';el('paths').value='';}
+
+
+
+
+
+
+
+
+
+
+  function generateHtml(){
+    const tableClass=el('tableClass').value.trim()||'A28_Connection';
+    const shortName=tableClass.split('_')[0];
+    const componentName=el('componentName').value.trim()||'Stop Light Control Relay Assembly';
+    const lines=[];
+
+    lines.push(`<!DOCTYPE html>`);
+    
+    lines.push(`<html>`);
+    lines.push(`<head>`);
+    lines.push(`  <meta charset='UTF-8'>`);
+    
+    lines.push(`  <meta name="viewport" content="width=device-width, initial-scale=0.7">`);
+    
+    lines.push(`  <title>Toyota Prius 3rd Gen | ${componentName} | ${shortName}</title>`);
+    
+    lines.push(`  <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/waruna96/eManual-css@latest/emanual_blogger_post_scoped.css'>`);
+    
+    lines.push(`  <link rel="stylesheet" href="css file scoped/blogger_minified_css_v1.css">`);
+   
+    lines.push(`</head>`);
+    lines.push(`<body>`);
+    
+    lines.push(`<div class='emanual'>`);
+    lines.push(`  <h1 class='headder_1'>Toyota Prius 3 <sup>rd</sup> Generation (XW30)</h1>`);
+    lines.push(`  <h2 id='top' class='headder_2'>${componentName} <a class='headder_2' href='#${shortName}'>(${shortName})</a></h2>`);
+    
+    
+    lines.push(`  <div class='container'></div>`);
+    lines.push(`  <h3 id='${shortName}' class='headder_3'><span class='h3'>${shortName}</span> TERMINALS OF ${componentName.toUpperCase()} CONNECTOR</h3>`);
+    
+    
+    lines.push(`  <div class='wiring_table'>`);
+    
+    lines.push(`  <table class='${tableClass}'>`);
+    
+    lines.push(`    <thead>`);
+    
+ lines.push(`
+<tr>
+  <td colspan="4">
+    <div class="separator" style="clear: both; text-align: center;">
+      <a 
+        href="${el('connectorImage').value.trim()}"
+        alt="Toyota Prius 3rd Gen ${componentName} Assembly ${shortName} Connector View"
+        title="Toyota Prius 3rd Gen ${componentName} Assembly - ${shortName} Connector"
+      >
+        <img 
+          src="${el('connectorImage').value.trim()}"
+          alt="Toyota Prius 3rd Gen ${componentName} Assembly ${shortName} Connector View"
+          title="Toyota Prius 3rd Gen ${componentName} Assembly - ${shortName} Connector"
+          width="320"
+          height="314"
+          style="max-width:100%; height:auto; border:0;"
+        />
+      </a>
+    </div>
+  </td>
+</tr>
+`);
+    
+    
+    
+    
+    lines.push(`      <tr><th> Terminal No </th><th> Symbol </th><th> Wiring (Color Code) & Color </th><th> Electrical Paths </th></tr>`);
+    lines.push(`    </thead>`);
+   
+   
+   
+    lines.push(`    <tbody>`);
+
+    rows.forEach(r=>{
+      const cls=r.code?` class='${escapeHtmlAttr(r.code)}'`:'';
+      
+      lines.push(`    <!-- ${shortName}-Connector Pin-${escapeHtml(r.terminal.split('-')[1]||'X')} -->`);
+      
+      lines.push(`      <tr>`);
+      
+      lines.push(`        <td> ${escapeHtml(r.terminal)} </td>`);
+      
+      
+      lines.push(`        <td> <span class='${shortName}'> ${escapeHtml(r.symbol)} </span> </td>`);
+      
+      
+      lines.push(`        <td${cls}> ${r.wiringHtml} </td>`);
+      
+      
+      
+      
+      lines.push(`        <td> ${r.pathsHtml} </td>`);
+     
+     
+     
+     
+      lines.push(`      </tr>`);
+    });
+
+    lines.push(`    </tbody>`);
+    lines.push(`  </table>`);
+    lines.push(`  </div>`);
+    
+    
+    lines.push(`  <p id='back' style='text-align:right;'><a href='#top'><span class='back'>Go back</span></a></p>`);
+    
+    
+    lines.push(`</div>`);
+    lines.push(`</body>`);
+    lines.push(`</html>`);
+
+    el('exportArea').value=lines.join('\n');
+  }
+  
+  
+
+  function downloadHtml(){
+  generateHtml();
+
+  const componentName = document.getElementById('componentName').value.trim() || 'Component';
+  const tableClass = document.getElementById('tableClass').value.trim() || 'Connector';
+
+  const shortName = tableClass.split('_')[0];
+
+  // Clean text for filename
+  const safeComponent = componentName
+    .replace(/[^a-z0-9]/gi, '_')
+    .replace(/_+/g, '_');
+
+  const fileName = `Toyota_Prius_3rdGen_${shortName}_${safeComponent}.html`;
+
+  const blob = new Blob([document.getElementById('exportArea').value], {
+    type: 'text/html'
+  });
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fileName;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+ 
+ 
+ 
+ 
+  function copyHtml(){generateHtml();el('exportArea').select();document.execCommand('copy');alert('Copied');}
+  
+  
+  
+  function loadExample(){
+  rows.length = 0;
+
+  const examplePath = `
+<div class="Electrical_Paths">
+  <span class="L maine-arrow">&#10132;</span>
+  <span class="A50">A50</span>
+</div>
+`.trim();
+
+  rows.push({
+    terminal: 'A28-1',
+    symbol: 'STP',
+    code: 'L',
+    display: 'L<br>Blue',
+    wiringHtml: 'L<br>Blue',
+    pathsText: examplePath,   // ✅ NEW logic
+    pathsHtml: examplePath    // ✅ SAME HTML for output
+  });
+
+  renderPreview();
+}
+
+
+  function escapeHtml(str){return str?String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):'';}
+ 
+ 
+ 
+ 
+ 
+ 
+  function escapeHtmlAttr(str){return str?String(str).replace(/["']/g,''):'';}
+
+
+function highlightText(text, keyword){
+
+  if(!keyword) return escapeHtml(text);
+
+  const safeText = escapeHtml(text);
+
+  const regex = new RegExp(`(${keyword})`, 'gi');
+
+  return safeText.replace(regex, '<mark>$1</mark>');
+}
+
+
+
+// ===============================
+// LOAD CONNECTOR IMAGE BUTTON
+// ===============================
+
+document.getElementById('loadImageBtn')
+.addEventListener('click', function(){
+
+  let value = document
+    .getElementById('connectorImage')
+    .value
+    .trim();
+
+  // Extract clean URL
+  const match = value.match(/https?:\/\/[^"]+/);
+
+  if(match){
+    value = match[0];
+    document.getElementById('connectorImage').value = value;
+  }
+
+  const img = document.getElementById('imagePreview');
+
+  if(value){
+
+    img.src = value;
+    img.style.display = 'block';
+
+  }else{
+
+    img.style.display = 'none';
+
+    alert('Please paste image URL');
+
+  }
+
+});
+
+
+
+
+
+
+el('addBtn').onclick=addRow;
+el('updateBtn').onclick=updateRow;
+el('clearForm').onclick=clearForm;
+el('exportHtml').onclick=generateHtml;
+el('downloadBtn').onclick=downloadHtml;
+el('copyBtn').onclick=copyHtml;
+el('importExample').onclick=loadExample;
+
+el('generatePinsBtn').onclick = generateRowsByPinCount;
+
+
+
+
+// ✅ AUTO RESTORE WHEN PAGE LOADS
+loadFromStorage();
+
+
+
+// ===============================
+// SEARCH BUTTON SYSTEM
+// ===============================
+
+el('searchBtn').addEventListener('click', function(){
+
+  const keyword = el('searchBox').value;
+
+  renderPreview(keyword);
+
+});
+
+
+
+// ===============================
+// ENTER KEY SEARCH
+// ===============================
+
+el('searchBox').addEventListener('keypress', function(e){
+
+  if(e.key === 'Enter'){
+
+    renderPreview(this.value);
+
+  }
+
+});
+
+
+
+// ===============================
+// CLEAR SEARCH
+// ===============================
+
+el('clearSearchBtn').addEventListener('click', function(){
+
+  el('searchBox').value = '';
+
+  renderPreview();
+
+});
+
+
+
+
+
+
+  // Export JSON
+  el('exportJson').onclick=function(){
+    const data={
+      componentName: el('componentName').value.trim(),
+      tableClass: el('tableClass').value.trim(),
+      rows: rows
+    };
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=(data.tableClass||'wiring')+'.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  // Import JSON
+  
+  el('importJsonBtn').onclick = function(){
+  el('importJsonFile').click();
+};
+
+el('importJsonFile').onchange = function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    try{
+      const data = JSON.parse(reader.result);
+
+      el('componentName').value = data.componentName || '';
+      el('tableClass').value = data.tableClass || '';
+
+      rows.length = 0;
+
+      (data.rows || []).forEach(r => {
+
+        const code = (r.code || '').toUpperCase();
+
+        // rebuild display properly
+        let display;
+        
+        
+        
+
+      if(code === ''){
+  display = '—<br>No Color';
+}else{
+  const parts = code.split('_');
+
+  if(parts.length === 1){
+    const name = colorNames[parts[0]] || '';
+    display = `${code}<br>${name}`;
+  }else{
+    const c1 = colorNames[parts[0]] || parts[0];
+    const c2 = colorNames[parts[1]] || parts[1];
+    display = `${code}<br>${c1}-${c2}`;
+  }
+}
+        
+        
+        
+        
+        
+
+        rows.push({
+          terminal: r.terminal || '',
+          symbol: r.symbol || '',
+          code: code,
+          display: display,
+          wiringHtml: display,
+          pathsText: r.pathsText || '',
+          pathsHtml: r.pathsHtml || r.pathsText || ''
+        });
+      });
+
+      renderPreview();
+
+    }catch(err){
+      alert("❌ Invalid JSON file.");
+      console.error(err);
+    }
+  };
+
+  reader.readAsText(file);
+};
+  
+  
+})();
+
+
+</script>
+
+</body>
+</html>
